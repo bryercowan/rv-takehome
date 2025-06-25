@@ -4,7 +4,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 export class Territory {
   @PrimaryGeneratedColumn() id!: number;
   @Column() name!: string;
-  @Column("jsonb") states!: string[];
+  @Column("simple-array") states!: string[];
 }
 
 

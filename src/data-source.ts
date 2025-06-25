@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Deal } from "./lib/entities/deals/Deal"; // Adjust the path as necessary
-import { Territory } from "./db/entity/Territory";
-import { Assignment } from "./db/entity/Assignment";
+import { Territory } from "./lib/entities/territory/Territory";
+import { Assignment } from "./lib/entities/assignment/Assignment";
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
