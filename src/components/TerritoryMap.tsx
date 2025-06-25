@@ -21,7 +21,7 @@ const CENTRAL = [
   "40", "48",
 ];
 
-function fipsToTerritory(id: string): "US-West" | "US-Central" | "US-East" {
+export function fipsToTerritory(id: string): "US-West" | "US-Central" | "US-East" {
   if (WEST.includes(id)) return "US-West";
   if (CENTRAL.includes(id)) return "US-Central";
   return "US-East";
