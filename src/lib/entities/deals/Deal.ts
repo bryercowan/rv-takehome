@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Deal {
+export class Deal extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -46,4 +46,7 @@ export class Deal {
 
   @Column({ nullable: true })
   cargo_type?: string;
+
+  @Column({ default: "Unassigned" })
+  territory!: string;
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { initializeDataSource } from "../../../data-source";
 import { Deal } from "../../../lib/entities/deals/Deal";
+import { cityToTerritory } from "@/lib/geo/geo-utils";
 
 const sampleDeals = [
   {
@@ -170,13 +171,12 @@ export async function POST() {
     const dataSource = await initializeDataSource();
     const dealRepository = dataSource.getRepository(Deal);
 
-    // Clear existing data
     await dealRepository.clear();
     console.log("Cleared existing deals");
 
-    // Insert sample data
     for (const dealData of sampleDeals) {
       const deal = dealRepository.create(dealData);
+      deal.territory = cityToTerritory(deal.origin_city)
       await dealRepository.save(deal);
     }
 
