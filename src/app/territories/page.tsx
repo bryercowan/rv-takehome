@@ -5,6 +5,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import TerritoryMap from "@/components/TerritoryMap";
 import AssignDialog from "@/components/AssignDialog";
 import TerritoryTable from "@/components/TerritoryTable";
+import TerritoryInsights from "@/components/TerritoryInsights";
+import clsx from "clsx";
 
 function PageFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -25,11 +27,17 @@ export default function TerritoriesPage() {
     staleTime: 60_000,
   });
 
+  const { data: deals = [] } = useQuery({
+    queryKey: ["deals"],
+    queryFn: () => fetch("/api/deals/list").then((r) => r.json()),
+  });
+
   const queryClient = useQueryClient();
 
   const [selected, setSelected] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [checkedIds, setCheckedIds] = useState<string[]>([]);
+  const [stageFilter, setStageFilter] = useState<string | null>(null);
 
   return (
     <PageFrame>
@@ -45,6 +53,10 @@ export default function TerritoriesPage() {
             onSelect={(t) => setSelected(t === selected ? null : t)}
           />
         )}
+      </section>
+
+      <section className="w-full">
+        {!isLoading && <TerritoryInsights territoryStats={data} deals={deals} selected={selected} />}
       </section>
 
       <section className="w-full">
