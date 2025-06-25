@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import TerritoryMap from "@/components/TerritoryMap";
-import { AssignDialog } from "@/components/AssignDialog";
+import AssignDialog from "@/components/AssignDialog";
 import TerritoryTable from "@/components/TerritoryTable";
 
 function PageFrame({ children }: { children: React.ReactNode }) {
